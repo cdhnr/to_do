@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minhas tarefas</title>
+</head>
+<body>
+    <h2>Bem-vindo(a), {{ username }}!</h2>
+    <form method="POST">
+        <input type="text" name="title" placeholder="Nova tarefa" required>
+        <button type="submit">Adicionar</button>
+    </form>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {% if task['done'] %}
+                    <s>{{ task['title'] }}</s>
+                {% else %}
+                    {{ task['title'] }}
+                {% endif %}
+                -  <a href="/done/{{ task['id'] }}">[✔]</a>
+                    <a href="/edit/{{ task['id'] }}">[✏️]</a>
+                    <a href="/delete/{{ task['id'] }}">[🗑️]</a>   
+            </li>
+        {% endfor %}
+    </ul>
+    <p><a href="/logout">Sair</a></p>
+</body>
+</html>
